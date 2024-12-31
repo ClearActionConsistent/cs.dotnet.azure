@@ -1,5 +1,10 @@
 WEB API Controller - CRUD TODO APIs with EF inmemory
 https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-9.0&tabs=visual-studio
 
+
 Link to openapi doc:
 http://localhost:5002/openapi/v1.json
+
+
+API Controller with actions, using Entity Framework:
+Controllers => Add => New Scaffolded Item => API Controller with actions, using Entity Framework
