@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        //options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     });
 
 builder.Services.AddDbContext<TodoContext>(opt =>
