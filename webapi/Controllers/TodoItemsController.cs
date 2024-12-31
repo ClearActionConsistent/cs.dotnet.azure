@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -86,19 +87,26 @@ namespace webapi.Controllers
         [HttpPost]
         public async Task<ActionResult<TodoItemDTO>> PostTodoItem(TodoItemDTO todoDTO)
         {
-            var todoItem = new TodoItem
+            if (ModelState.IsValid)
             {
-                IsComplete = todoDTO.IsComplete,
-                Name = todoDTO.Name
-            };
+                var todoItem = new TodoItem
+                {
+                    IsComplete = todoDTO.IsComplete,
+                    Name = todoDTO.Name
+                };
 
-            _context.TodoItems.Add(todoItem);
-            await _context.SaveChangesAsync();
+                _context.TodoItems.Add(todoItem);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction(
-                nameof(GetTodoItem),
-                new { id = todoItem.Id },
-                ItemToDTO(todoItem));
+                return CreatedAtAction(
+                    nameof(GetTodoItem),
+                    new { id = todoItem.Id },
+                    ItemToDTO(todoItem));
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
         // </snippet_Create>
 
