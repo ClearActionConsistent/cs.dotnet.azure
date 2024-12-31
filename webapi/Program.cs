@@ -7,6 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+    });
+
 builder.Services.AddDbContext<TodoContext>(opt =>
     opt.UseInMemoryDatabase("TodoList"));
 
