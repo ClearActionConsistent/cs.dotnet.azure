@@ -6,11 +6,11 @@ namespace webapi.DTOs
     public class TodoItemDTO
     {
         public long Id { get; set; }
-        [Required]
+        //[Required]
         public string? Name { get; set; }
         public bool IsComplete { get; set; }
 
-        [FinishBeforYearAtribute(2025)]
+        //[FinishBeforYearAtribute(2025)]
         public DateTime DueDate { get; set; }
     }
 }

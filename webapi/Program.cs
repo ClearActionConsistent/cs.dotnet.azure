@@ -1,5 +1,8 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using webapi.Data;
+using webapi.FluentValidators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,8 @@ builder.Services.AddControllers()
     {
         //options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     });
+
+builder.Services.AddValidatorsFromAssemblyContaining<TodoValidator>();
 
 builder.Services.AddDbContext<TodoContext>(opt =>
     opt.UseInMemoryDatabase("TodoList"));

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,10 +19,12 @@ namespace webapi.Controllers
     public class TodoItemsController : ControllerBase
     {
         private readonly TodoContext _context;
+        private IValidator<TodoItemDTO> _validator;
 
-        public TodoItemsController(TodoContext context)
+        public TodoItemsController(TodoContext context, IValidator<TodoItemDTO> validator)
         {
             _context = context;
+            _validator = validator;
         }
 
         // GET: api/TodoItems
@@ -87,7 +91,9 @@ namespace webapi.Controllers
         [HttpPost]
         public async Task<ActionResult<TodoItemDTO>> PostTodoItem(TodoItemDTO todoDTO)
         {
-            if (ModelState.IsValid)
+            ValidationResult result = await _validator.ValidateAsync(todoDTO);
+
+            if (result.IsValid)
             {
                 var todoItem = new TodoItem
                 {
