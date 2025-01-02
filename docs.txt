@@ -21,4 +21,8 @@ ASPNETCORE IDENTITY
 				=> generate Migrations folder with code that needed for Identity tables
 			+ run command: Update-Database
 				=> pickup generated code from step above to apply to db
+	3. Setup Identity to protect web apply
+		https://github.com/ClearActionConsistent/cs.dotnet.azure/commit/0ec32e51b6e6abfa026e1a1b189f65d6f72c257d
+	4. Maim classes to use in Identity FW are SignInManager & UserManager
+	
 		
