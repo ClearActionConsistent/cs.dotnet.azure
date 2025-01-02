@@ -11,3 +11,14 @@ Controllers => Add => New Scaffolded Item => API Controller with actions, using 
 
 ASPNETCORE IDENTITY 
 	1. setup nuget packages: https://fpt-software.udemy.com/course/complete-guide-to-aspnet-core-identity/learn/lecture/39542288#overview
+	2. setup EF core: https://fpt-software.udemy.com/course/complete-guide-to-aspnet-core-identity/learn/lecture/39542304#overview
+		- use env configuration
+		- db context class
+		- migration:
+			+ set startup project
+			+ open package management console
+			+ run command: Add-Migration Init-Identity-db 
+				=> generate Migrations folder with code that needed for Identity tables
+			+ run command: Update-Database
+				=> pickup generated code from step above to apply to db
+		
