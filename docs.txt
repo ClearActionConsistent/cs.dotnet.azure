@@ -8,3 +8,6 @@ http://localhost:5002/openapi/v1.json
 
 API Controller with actions, using Entity Framework:
 Controllers => Add => New Scaffolded Item => API Controller with actions, using Entity Framework
+
+ASPNETCORE IDENTITY 
+	1. setup nuget packages: https://fpt-software.udemy.com/course/complete-guide-to-aspnet-core-identity/learn/lecture/39542288#overview
