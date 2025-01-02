@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapi", "webapi.csproj", "{EB06679E-22E3-4D6D-B78E-61490E90407F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreIdentityRazor", "..\AspNetCoreIdentityRazor\AspNetCoreIdentityRazor.csproj", "{CA3B1DF4-79F3-468D-A0E7-74DE77DDF6E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{EB06679E-22E3-4D6D-B78E-61490E90407F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB06679E-22E3-4D6D-B78E-61490E90407F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB06679E-22E3-4D6D-B78E-61490E90407F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA3B1DF4-79F3-468D-A0E7-74DE77DDF6E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA3B1DF4-79F3-468D-A0E7-74DE77DDF6E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA3B1DF4-79F3-468D-A0E7-74DE77DDF6E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA3B1DF4-79F3-468D-A0E7-74DE77DDF6E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

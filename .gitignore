@@ -5,3 +5,6 @@
 /webapi/.vs/webapi
 /webapi/bin/Debug/net9.0
 /webapi/obj
+/webapi/.vs/ProjectEvaluation
+/AspNetCoreIdentityRazor/obj
+/AspNetCoreIdentityRazor/bin/Debug/net9.0
