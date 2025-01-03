@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using AspNetCoreIdentityRazor.Data.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,8 +8,8 @@ namespace AspNetCoreIdentityRazor.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        public SignInManager<IdentityUser> SignInManager { get; }
-        public LoginModel(SignInManager<IdentityUser> userManager)
+        public SignInManager<CustomUser> SignInManager { get; }
+        public LoginModel(SignInManager<CustomUser> userManager)
         {
             SignInManager = userManager;
         }

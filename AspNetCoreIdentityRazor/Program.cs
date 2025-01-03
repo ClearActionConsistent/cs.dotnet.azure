@@ -1,4 +1,5 @@
 using AspNetCoreIdentityRazor.Data;
+using AspNetCoreIdentityRazor.Data.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +12,7 @@ builder.Services.AddDbContext<IdentityDBContext>(options => {
 });
 
 //we can specify other classes to get extra fields of user/role
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => {
+builder.Services.AddIdentity<CustomUser, IdentityRole>(options => {
     options.Password.RequiredLength = 9;
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.User.RequireUniqueEmail = true;

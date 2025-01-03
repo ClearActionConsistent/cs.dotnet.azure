@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using AspNetCoreIdentityRazor.Data.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,9 +10,9 @@ namespace AspNetCoreIdentityRazor.Pages.Account
     {
         [BindProperty]
         public RegisterViewModel RegisterViewModel { get; set; } = new RegisterViewModel();
-        public UserManager<IdentityUser> UserManager { get; }
+        public UserManager<CustomUser> UserManager { get; }
 
-        public RegisterModel(UserManager<IdentityUser> userManager)
+        public RegisterModel(UserManager<CustomUser> userManager)
         {
             UserManager = userManager;
         }
@@ -23,10 +24,12 @@ namespace AspNetCoreIdentityRazor.Pages.Account
         {
             if(!ModelState.IsValid) return Page();
 
-            var user = new IdentityUser
+            var user = new CustomUser
             {
                 Email = RegisterViewModel.Email,
-                UserName = RegisterViewModel.Email
+                UserName = RegisterViewModel.Email,
+                Position = RegisterViewModel.Position,
+                Role = RegisterViewModel.Role
             };
 
             var result = await this.UserManager.CreateAsync(user, RegisterViewModel.Password);
@@ -58,5 +61,10 @@ namespace AspNetCoreIdentityRazor.Pages.Account
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; } = string.Empty;
+
+        [Required]
+        public string Position { get; set; } = string.Empty;
+        [Required]
+        public string Role { get; set; } = string.Empty;
     }
 }
