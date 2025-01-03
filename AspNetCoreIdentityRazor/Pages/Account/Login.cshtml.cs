@@ -34,7 +34,7 @@ namespace AspNetCoreIdentityRazor.Pages.Account
 
             if (result.Succeeded)
             {
-                return RedirectToPage("Index");
+                return RedirectToPage("/Index");
             }
 
             if (result.IsLockedOut)

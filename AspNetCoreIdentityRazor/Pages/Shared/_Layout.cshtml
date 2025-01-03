@@ -30,6 +30,7 @@
                 </div>
                 <div class="mr-2">
                     @* <partial name="_LoginStatusPartial" /> *@
+                    Welcome to @User?.Identity?.Name (@User?.Claims.FirstOrDefault(x => x.Type == "position"))
                 </div>
             </div>
         </nav>
