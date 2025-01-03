@@ -32,8 +32,8 @@ namespace AspNetCoreIdentityRazor.Pages.Account
             var result = await this.UserManager.CreateAsync(user, RegisterViewModel.Password);
             if(result.Succeeded)
             {
-                var token = this.UserManager.GenerateEmailConfirmationTokenAsync(user);
-                return Redirect(Url.PageLink(pageName: "", values: new { userId = user.Id, token = token }) ?? "");
+                var token = await this.UserManager.GenerateEmailConfirmationTokenAsync(user);
+                return Redirect(Url.PageLink(pageName: "ConfirmEmail", values: new { userId = user.Id, token = token }) ?? "");
             }
 
             foreach(var error in result.Errors)
