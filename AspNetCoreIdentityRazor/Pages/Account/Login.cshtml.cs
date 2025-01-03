@@ -9,9 +9,9 @@ namespace AspNetCoreIdentityRazor.Pages.Account
     public class LoginModel : PageModel
     {
         public SignInManager<CustomUser> SignInManager { get; }
-        public LoginModel(SignInManager<CustomUser> userManager)
+        public LoginModel(SignInManager<CustomUser> signInManager)
         {
-            SignInManager = userManager;
+            SignInManager = signInManager;
         }
         [BindProperty]
         public CredentialViewModel Credential { get; set; } = new CredentialViewModel();
@@ -40,11 +40,16 @@ namespace AspNetCoreIdentityRazor.Pages.Account
             if (result.IsLockedOut)
             {
                 ModelState.AddModelError("Login", "You are locked out.");
+                return Page();
             }
-            else
+
+            if (result.RequiresTwoFactor)
             {
-                ModelState.AddModelError("Login", "Failed to login.");
+                //this line of code also write a cookie to browser which will be used to verify the OTP sending in email later on
+                return RedirectToPage("/Account/LoginTwoFactor", new {Email = this.Credential.Email, RememberMe = this.Credential.RememberMe});
             }
+            
+            ModelState.AddModelError("Login", "Failed to login.");
             return Page();
         }
     }
