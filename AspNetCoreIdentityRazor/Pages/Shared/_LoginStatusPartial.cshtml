@@ -1,0 +1,22 @@
+﻿@page
+@model AspNetCoreIdentityRazor.Pages.Shared._LoginStatusPartialModel
+@{
+}
+
+<!-
+	if user has not logged in yet, create a link to login page
+	if user has logged in, create a button here to post to Logout page
+
+-->
+	@if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
+{
+	<form method="post" class="form-inline" asp-page="/Account/Logout">
+		Welcome to @User.Identity.Name
+		<button type="submit" value="Logout"></button>
+	</form>
+}
+else
+{
+	<a href="/Account/Login">Login</a>
+}
+

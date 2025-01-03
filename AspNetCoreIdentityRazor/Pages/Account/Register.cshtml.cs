@@ -33,7 +33,11 @@ namespace AspNetCoreIdentityRazor.Pages.Account
             if(result.Succeeded)
             {
                 var token = await this.UserManager.GenerateEmailConfirmationTokenAsync(user);
-                return Redirect(Url.PageLink(pageName: "ConfirmEmail", values: new { userId = user.Id, token = token }) ?? "");
+                var confirmationLink = Url.PageLink(pageName: "ConfirmEmail", values: new { userId = user.Id, token = token }) ?? "";
+
+                //send the link to use's email, asking for email confirmation. When user click on the link, next step will be processed.
+
+                return Redirect(confirmationLink);
             }
 
             foreach(var error in result.Errors)
