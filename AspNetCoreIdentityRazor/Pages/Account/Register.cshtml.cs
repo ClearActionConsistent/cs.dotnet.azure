@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using AspNetCoreIdentityRazor.Data.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -32,9 +33,15 @@ namespace AspNetCoreIdentityRazor.Pages.Account
                 Role = RegisterViewModel.Role
             };
 
+            var positionClaim = new Claim("position", "EC");
+            var roleClaim = new Claim("role", "Sr. Net DEV");
+
             var result = await this.UserManager.CreateAsync(user, RegisterViewModel.Password);
             if(result.Succeeded)
             {
+                await UserManager.AddClaimAsync(user, positionClaim);
+                await UserManager.AddClaimAsync(user, roleClaim);
+
                 var token = await this.UserManager.GenerateEmailConfirmationTokenAsync(user);
                 var confirmationLink = Url.PageLink(pageName: "ConfirmEmail", values: new { userId = user.Id, token = token }) ?? "";
 
