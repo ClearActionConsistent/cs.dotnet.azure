@@ -1,0 +1,48 @@
+﻿@page
+@model AspNetCoreIdentityRazor.Pages.Account.UserProfileModel
+@{
+}
+
+<h3>User Profile</h3>
+<div class="container border" style="padding:20px">
+	<form method="post">
+		<div class="text-danger" asp-validation-summary="All"></div>
+		<div class="mb-3 row">
+			<div class="col-2">
+				<label asp-for="userProfileViewModel.Email"></label>
+			</div>
+			<div class="col-5">
+				<input type="text" asp-for="userProfileViewModel.Email" class="form-control" readonly/>
+				<span class="text-danger" asp-validation-for="userProfileViewModel.Email"></span>
+			</div>
+		</div>
+
+		<div class="mb-3 row">
+			<div class="col-2">
+				<label asp-for="userProfileViewModel.Position"></label>
+			</div>
+			<div class="col-5">
+				<input type="text" asp-for="userProfileViewModel.Position" class="form-control" />
+				<span class="text-danger" asp-validation-for="userProfileViewModel.Position"></span>
+			</div>
+		</div>
+
+		<div class="mb-3 row">
+			<div class="col-2">
+				<label asp-for="userProfileViewModel.Role"></label>
+			</div>
+			<div class="col-5">
+				<input type="text" asp-for="userProfileViewModel.Role" class="form-control" />
+				<span class="text-danger" asp-validation-for="userProfileViewModel.Role"></span>
+			</div>
+		</div>
+
+		<div class="mb-3 row">
+			<div class="col-2">
+				<input type="submit" class="btn btn-primary" value="Update" />
+			</div>
+			<div class="col-5">
+			</div>
+		</div>
+	</form>
+</div>
