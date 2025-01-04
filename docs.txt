@@ -34,5 +34,14 @@ ASPNETCORE IDENTITY
 	6. 2FA email provider: prerequisites
 		AddDefaultTokenProviders();
 		manual update user.TwoFactorEnabled(this is usually done in security page)
+		
+	7. 2FA Authenticator App: prerequisites
+		AddDefaultTokenProviders();
+		manual update user.TwoFactorEnabled = 0(to make sure user can login successfully before setting up 2FA)
+		after login, manually navigate to account/authenticatormfasetup to get the key
+		open Authenticator app on phone to create new account with this key
+		generate time-base opt from Athenticator app to verify on web app(will impl later)
+		
+		
 	
 		
