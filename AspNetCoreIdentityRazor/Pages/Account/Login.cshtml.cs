@@ -45,8 +45,18 @@ namespace AspNetCoreIdentityRazor.Pages.Account
 
             if (result.RequiresTwoFactor)
             {
+                /*For Email MFA*/
+                /*
                 //this line of code also write a cookie to browser which will be used to verify the OTP sending in email later on
                 return RedirectToPage("/Account/LoginTwoFactor", new {Email = this.Credential.Email, RememberMe = this.Credential.RememberMe});
+                */
+
+                /*
+                 * Authenticator MFA
+                    need to enable two factor authen for the user in db 
+                 */
+
+                return RedirectToPage("/Account/AuthenticatorMFALogin", new { RememberMe = this.Credential.RememberMe });
             }
             
             ModelState.AddModelError("Login", "Failed to login.");
