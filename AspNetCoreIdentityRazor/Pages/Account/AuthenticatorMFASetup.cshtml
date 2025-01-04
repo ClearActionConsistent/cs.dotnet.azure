@@ -5,5 +5,16 @@
 
 <h3>Authenticator Key setup</h3>
 <p>
+	@if (Model.authenticatorMFAViewModel.QRCodeBytes != null)
+	{
+		<img src="@string.Format("data:image/png;base64,{0}",
+			Convert.ToBase64String(Model.authenticatorMFAViewModel.QRCodeBytes))"
+			width="300"
+			heigh="300"
+		/>
+	}
+	
+</p>
+<p>
 	@Model.authenticatorMFAViewModel.Key
 </p>

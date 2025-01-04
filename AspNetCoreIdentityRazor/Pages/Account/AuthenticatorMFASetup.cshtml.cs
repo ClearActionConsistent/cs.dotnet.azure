@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using QRCoder;
 
 namespace AspNetCoreIdentityRazor.Pages.Account
 {
@@ -39,8 +40,7 @@ namespace AspNetCoreIdentityRazor.Pages.Account
             }
 
             this.authenticatorMFAViewModel.Key = key;
-
-
+            this.authenticatorMFAViewModel.QRCodeBytes = GenerateQRCodeByes("My App", key, user.Email ?? string.Empty);
 
             return Page();
         }
@@ -53,15 +53,21 @@ namespace AspNetCoreIdentityRazor.Pages.Account
             //redirect to homepage
         }
 
-        //private byte[] GenerateQRCodeByes(string provider, string key, string email)
-        //{
+        private byte[] GenerateQRCodeByes(string provider, string key, string email)
+        {
+            var qrCodeGen = new QRCodeGenerator();
+            var qrCodeData = qrCodeGen.CreateQrCode(
+                $"otpauth://totp/{provider}:{email}?secret={key}&issuer={provider}", 
+                QRCodeGenerator.ECCLevel.Q);
 
-        //    return null;
-        //}
+            var qrCode = new PngByteQRCode(qrCodeData);
+            return qrCode.GetGraphic(20);
+        }
     }
 
     public class AuthenticatorMFAViewModel
     {
         public string Key { get; set; } = string.Empty;
+        public byte[]? QRCodeBytes { get; set; }
     }
 }
