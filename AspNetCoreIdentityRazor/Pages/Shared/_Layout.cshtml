@@ -30,7 +30,17 @@
                 </div>
                 <div class="mr-2">
                     @* <partial name="_LoginStatusPartial" /> *@
-                    Welcome to @User?.Identity?.Name (@User?.Claims.FirstOrDefault(x => x.Type == "position"))
+                    @if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <form method="post" class="form-inline" asp-page="/Account/Logout">
+                            Welcome to @User.Identity.Name (@User.Claims.FirstOrDefault(x => x.Type == "position"))
+                            <button class="btn btn-primary" type="submit" value="Logout"></button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a href="/Account/Login">Login</a>
+                    }
                 </div>
             </div>
         </nav>

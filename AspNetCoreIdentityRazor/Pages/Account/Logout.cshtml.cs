@@ -1,12 +1,14 @@
+using AspNetCoreIdentityRazor.Data.Account;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AspNetCoreIdentityRazor.Pages.Account
 {
     public class LogoutModel : PageModel
     {
-        public SignInManager<IdentityUser> SignInManager { get; }
-        public LogoutModel(SignInManager<IdentityUser> signInManager)
+        public SignInManager<CustomUser> SignInManager { get; }
+        public LogoutModel(SignInManager<CustomUser> signInManager)
         {
             SignInManager = signInManager;
         }
@@ -15,10 +17,10 @@ namespace AspNetCoreIdentityRazor.Pages.Account
         {
         }
 
-        public async Task OnPostAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             await this.SignInManager.SignOutAsync();
-            RedirectToPage("/Account/Login");
+            return RedirectToPage("/index");
         }
     }
 }
