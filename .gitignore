@@ -10,3 +10,6 @@
 /AspNetCoreIdentityRazor/bin/Debug/net9.0
 /WebAppRazor/obj
 /WebAppRazor/bin/Debug/net9.0
+/Shared/obj/Debug/net9.0
+/Shared/obj
+/Shared/bin/Debug/net9.0

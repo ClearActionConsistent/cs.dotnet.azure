@@ -5,6 +5,11 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if(Model.todoItems != null)
+    {
+        foreach(var todo in Model.todoItems)
+        {
+            <h3>@todo.Name</h3>
+        }
+    }
 </div>

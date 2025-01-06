@@ -31,6 +31,14 @@ namespace webapi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetTodoItems()
         {
+            //add default data just for testing
+            //return Ok(new List<TodoItemDTO> { new TodoItemDTO { 
+            //    Id = 1,
+            //    DueDate = DateTime.Now,
+            //    IsComplete = true,
+            //    Name = "todo 1"
+            //} });
+
             return await _context.TodoItems
                 .Select(x => ItemToDTO(x))
                 .ToListAsync();
