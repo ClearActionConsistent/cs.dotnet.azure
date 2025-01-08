@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebAppRazor.DTOs;
@@ -17,7 +18,21 @@ namespace WebAppRazor.Pages
         }
         public async Task OnGet()
         {
-            this.token = await this.authService.GenerateTokenAsync("user15@test.com", "123456789aA!");
+            Token? token;
+            var strToken = HttpContext.Session.GetString("access_token");
+            if (string.IsNullOrEmpty(strToken))
+            {
+                token = await authService.GenerateTokenAsync("user15@test.com","123456789aA!");
+                
+                if(token != null)
+                    HttpContext.Session.SetString("access_token", JsonSerializer.Serialize(token));
+            }
+            else
+            {
+                token = JsonSerializer.Deserialize<Token>(strToken);
+            }
+
+            this.token = token;
         }
     }
 }
