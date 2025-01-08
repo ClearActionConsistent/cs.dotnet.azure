@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 
-builder.Services.AddHttpClient("WebApi", client => {
+builder.Services.AddHttpClient("TodoApi", client => {
     client.BaseAddress = new Uri("http://localhost:5002/api/");
 });
 
@@ -15,6 +15,7 @@ builder.Services.AddHttpClient("AuthApi", client => {
 });
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ITodoService, TodoService>();
 
 
 var app = builder.Build();

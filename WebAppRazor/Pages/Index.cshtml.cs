@@ -3,34 +3,29 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Shared;
+using WebAppRazor.Services;
 
 namespace WebAppRazor.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        public readonly IHttpClientFactory HttpClientFactory;
 
         [BindProperty]
         public List<TodoItemDTO> todoItems { get; set; }
+        public ITodoService TodoService { get; }
 
-        public IndexModel(ILogger<IndexModel> logger, IHttpClientFactory httpClientFactory)
+        public IndexModel(ILogger<IndexModel> logger, ITodoService todoService)
         {
             _logger = logger;
-            HttpClientFactory = httpClientFactory;
+            TodoService = todoService;
             this.todoItems = new();
         }
         
 
         public async Task OnGetAsync()
         {
-            var httpClient = this.HttpClientFactory.CreateClient("WebApi");
-            var data = await httpClient.GetStringAsync("TodoItems");
-            Console.WriteLine(data);
-
-            var xx = JsonSerializer.Deserialize<List<TodoItemDTO>>(data);
-
-            todoItems = await httpClient.GetFromJsonAsync<List<TodoItemDTO>>("TodoItems") ?? new List<TodoItemDTO>();
+            todoItems = await this.TodoService.GetTodosAsync();
         }
     }
 }
