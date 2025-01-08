@@ -21,6 +21,8 @@ namespace WebAppRazor.Services
                 Password = password
             });
 
+            responseMessage.EnsureSuccessStatusCode();
+
             var responseBody = await responseMessage.Content.ReadAsStringAsync();
 
             if (responseBody == null)
