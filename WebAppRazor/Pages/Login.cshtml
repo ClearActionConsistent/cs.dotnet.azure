@@ -1,0 +1,13 @@
+﻿@page
+@model WebAppRazor.Pages.LoginModel
+@{
+}
+
+@if(Model.token != null)
+{
+	<p>Token:</p>
+	<p>@Model.token.access_token</p>
+
+	<p>expires at:</p>
+	<p>@Model.token.expires_at</p>
+}

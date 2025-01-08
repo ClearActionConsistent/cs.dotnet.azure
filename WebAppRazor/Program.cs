@@ -1,3 +1,5 @@
+using WebAppRazor.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +9,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpClient("WebApi", client => {
     client.BaseAddress = new Uri("http://localhost:5002/api/");
 });
+
+builder.Services.AddHttpClient("AuthApi", client => {
+    client.BaseAddress = new Uri("http://localhost:5119/api/");
+});
+
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 
 var app = builder.Build();

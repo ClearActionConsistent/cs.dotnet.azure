@@ -42,6 +42,8 @@ ASPNETCORE IDENTITY
 		open Authenticator app on phone to create new account with this key
 		generate time-base opt from Athenticator app to verify on web app(will impl later)
 		
+Web app	
+	access /login to generate jwt token
 		
 	
 		
