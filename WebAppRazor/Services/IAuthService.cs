@@ -5,5 +5,6 @@ namespace WebAppRazor.Services
     public interface IAuthService
     {
         Task<Token?> GenerateTokenAsync(string userName, string password);
+        string Token { get; set; }
     }
 }

@@ -20,11 +20,30 @@ builder.Services.AddSession(options => {
     options.Cookie.IsEssential = true;
 });
 
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddSingleton<IAuthService, AuthService>();
 builder.Services.AddScoped<ITodoService, TodoService>();
 
 
 var app = builder.Build();
+app.UseSession();
+
+app.Use((context, next) => {
+    using(var serviceScope = app.Services.CreateScope())
+    {
+        /*This impl only work with the life time of AuthService is singleton???????
+         AddScoped doesn't work????????????????????????????????????????????????????
+        need to investigate why????????????????????????????????????????????????????*/
+        var services = serviceScope.ServiceProvider;
+        var authService = services.GetRequiredService<IAuthService>();
+        var token = context.Session.GetString("access_token");
+        if(!string.IsNullOrEmpty(token))
+        {
+            authService.Token = token;
+        }
+    }
+    
+    return next(context);
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -35,7 +54,7 @@ if (!app.Environment.IsDevelopment())
 app.UseRouting();
 
 app.UseAuthorization();
-app.UseSession();
+
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
