@@ -30,6 +30,12 @@ builder.Services.ConfigureApplicationCookie(options => {
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
 
+//add social logins
+builder.Services.AddAuthentication().AddFacebook(options => { 
+    options.AppId = builder.Configuration["FacebookAppId"] ?? string.Empty; ;
+    options.AppSecret = builder.Configuration["FacebookAppSecret"] ?? string.Empty;
+});
+
 
 var app = builder.Build();
 
