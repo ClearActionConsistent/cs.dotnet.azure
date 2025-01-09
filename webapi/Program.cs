@@ -58,6 +58,12 @@ builder.Services.AddAuthorization(config => {
     {
         policy.RequireClaim("Department", "HR");
     });
+
+    config.AddPolicy("MustHRAdmin", policy =>
+    {
+        policy.RequireClaim("Department", "HR")
+        .RequireClaim("Role", "Admin");
+    });
 });
 
 var app = builder.Build();
