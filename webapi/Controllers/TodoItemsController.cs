@@ -31,6 +31,7 @@ namespace webapi.Controllers
 
         // GET: api/TodoItems
         [HttpGet]
+        [Authorize(Policy = "MustBelongToHRDeparment")]
         public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetTodoItems()
         {
             //add default data just for testing

@@ -52,6 +52,14 @@ builder.Services.AddAuthentication(options => {
 
 //when the token come in, JWT Bearer will perform the authentication process by extracting & validating the token from the header
 
+//add authorization
+builder.Services.AddAuthorization(config => {
+    config.AddPolicy("MustBelongToHRDeparment", policy =>
+    {
+        policy.RequireClaim("Department", "HR");
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
