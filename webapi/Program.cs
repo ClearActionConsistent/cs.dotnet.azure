@@ -2,8 +2,10 @@ using System.Text;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using webapi.Authorization;
 using webapi.Data;
 using webapi.FluentValidators;
 
@@ -62,9 +64,12 @@ builder.Services.AddAuthorization(config => {
     config.AddPolicy("MustHRAdmin", policy =>
     {
         policy.RequireClaim("Department", "HR")
-        .RequireClaim("Role", "Admin");
+        .RequireClaim("Role", "Admin")
+        .Requirements.Add(new HRAdminPropationRequirement(3));
     });
 });
+
+builder.Services.AddSingleton<IAuthorizationHandler, HRAdminPropationRequirementHandler>();
 
 var app = builder.Build();
 
