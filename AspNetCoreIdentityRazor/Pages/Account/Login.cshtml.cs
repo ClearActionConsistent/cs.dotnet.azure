@@ -71,7 +71,7 @@ namespace AspNetCoreIdentityRazor.Pages.Account
         public ActionResult OnPostLoginExternal(string provider)
         {
             var properties = this.SignInManager.ConfigureExternalAuthenticationProperties(provider, null);
-            properties.RedirectUri = Url.Action("FacebookLoginCallback", "Auth");
+            properties.RedirectUri = Url.Action("FacebookLoginCallback", "FBAuth");
             /*The app is configuring FB authentication handler using MS.ASP.NETCORE.Auth.FB, the handler knows the FB api to log user in and then FB return back user info.
              then ASPNETCORE Identity automatically capture user info returned from FB to create local account with appropriated claims when FB call back to the url before.
 

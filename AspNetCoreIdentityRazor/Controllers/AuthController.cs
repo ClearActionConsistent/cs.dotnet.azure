@@ -49,24 +49,6 @@ namespace AspNetCoreIdentityRazor.Controllers
             });
         }
 
-        [HttpPost]
-        public async Task<ActionResult> FacebookLoginCallback()
-        {
-            var loginInfo = await this.signInManager.GetExternalLoginInfoAsync();
-            if (loginInfo != null)
-            {
-                var emailClaim = loginInfo.Principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email);
-                var userClaim = loginInfo.Principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
-
-                if (emailClaim != null && userClaim != null)
-                {
-                    var user = new CustomUser { Email = emailClaim.Value, UserName = userClaim.Value };
-                    await this.signInManager.SignInAsync(user, false);
-                }
-            }
-
-            return RedirectToPage("/Index");
-        }
         private string GenerateJWTToken(IEnumerable<Claim> claims, DateTime expireAt)
         {
             //HmacSha256Signature use 32-character key
