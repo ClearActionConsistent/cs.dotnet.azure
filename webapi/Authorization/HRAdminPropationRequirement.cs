@@ -25,7 +25,7 @@ namespace webapi.Authorization
             if (!context.User.HasClaim(x => x.Type == "EmploymentDate"))
                 return Task.CompletedTask;
 
-            var strEmploymentDate = context.User.FindFirst(x = x => x.Type == "EmploymentDate").Value
+            var strEmploymentDate = context.User.FindFirst(x => x.Type == "EmploymentDate")?.Value;
             var parseSuccess = DateTime.TryParse(strEmploymentDate, out DateTime employmentDate);
             
             if (!parseSuccess)
